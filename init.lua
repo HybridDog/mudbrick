@@ -75,21 +75,22 @@ minetest.register_abm({
 	chance = 2,
 	action = function(pos, node)
 		-- return if already complete
-		if minetest.get_item_group(node.name, "mudbrick") == 2 then
+		local mudbrick_group = minetest.get_item_group(node.name, "mudbrick")
+		if mudbrick_group == 2 then
 			return
 		end
 		
 		-- check light
-		if not minetest.get_node_light(pos) then
-			return
-		end
-		if minetest.get_node_light(pos) < 1 then
+		local light = minetest.get_node_light(pos)
+		if not light
+		or light < 1 then
 			return
 		end
 		
 		-- dry
-		local height = minetest.get_item_group(node.name, "mudbrick") + 1
-		minetest.set_node(pos, {name="mudbrick:mudbrick_"..height})
+		local height = mudbrick_group + 1
+		node.name = "mudbrick:mudbrick_"..height
+		minetest.set_node(pos, node)
 	end
 })
 
