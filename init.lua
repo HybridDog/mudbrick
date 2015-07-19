@@ -25,7 +25,7 @@ minetest.register_node("mudbrick:mudbrick_1", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-minetest.register_node( "mudbrick:mudbrick_2", {  
+minetest.register_node( "mudbrick:mudbrick_2", {
 	description = "Mudbricks",
 	tiles = { "mudbrick_mudbrick_dried.png"},
 	paramtype = "light",
@@ -79,14 +79,14 @@ minetest.register_abm({
 		if mudbrick_group == 2 then
 			return
 		end
-		
+
 		-- check light
 		local light = minetest.get_node_light(pos)
 		if not light
 		or light < 1 then
 			return
 		end
-		
+
 		-- dry
 		local height = mudbrick_group + 1
 		node.name = "mudbrick:mudbrick_"..height
